@@ -1,6 +1,4 @@
 #include "binary_trees.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * binary_tree_inorder - Goes through a binary tree using in-order traversal.
@@ -14,31 +12,7 @@ void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int))
 	if (tree == NULL || func == NULL)
 		return;
 
-	const binary_tree_t *current = tree;
-	int done = 0;
-	stack_t *stack = NULL;
-
-	while (!done)
-	{
-		if (current != NULL)
-		{
-			stack_push(&stack, current);
-			current = current->left;
-		}
-		else
-		{
-			if (!stack_empty(stack))
-			{
-				current = stack_pop(&stack);
-				func(current->n);
-				current = current->right;
-			}
-			else
-			{
-				done = 1;
-			}
-		}
-	}
-
-	free_stack(stack);
+	binary_tree_inorder(tree->left, func);
+	func(tree->n);
+	binary_tree_inorder(tree->right, func);
 }
