@@ -9,39 +9,39 @@
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-    const binary_tree_t **queue;
-    size_t front = 0, rear = 0;
-    int flag = 0;
+	const binary_tree_t **queue;
+	size_t front = 0, rear = 0;
+	int flag = 0;
 
-    if (!tree)
-        return (0);
+	if (!tree)
+		return (0);
 
-    queue = malloc(sizeof(*queue) * 1024);
-    if (!queue)
-        return (0);
+	queue = malloc(sizeof(*queue) * 1024);
+	if (!queue)
+		return (0);
 
-    queue[rear++] = tree;
+	queue[rear++] = tree;
 
-    while (front < rear)
-    {
-        const binary_tree_t *node = queue[front++];
+	while (front < rear)
+	{
+		const binary_tree_t *node = queue[front++];
 
-        if (node)
-        {
-            if (flag)
-            {
-                free(queue);
-                return (0);
-            }
-            queue[rear++] = node->left;
-            queue[rear++] = node->right;
-        }
-        else
-        {
-            flag = 1;
-        }
-    }
+		if (node)
+		{
+			if (flag)
+			{
+				free(queue);
+				return (0);
+			}
+			queue[rear++] = node->left;
+			queue[rear++] = node->right;
+		}
+		else
+		{
+			flag = 1;
+		}
+	}
 
-    free(queue);
-    return (1);
+	free(queue);
+	return (1);
 }
