@@ -6,11 +6,12 @@
  */
 void binary_tree_delete(binary_tree_t *tree)
 {
-    if (tree == NULL)
-        return;
+	if (tree == NULL)
+		return;
 
-    binary_tree_delete(tree->left);  /* Delete left subtree */
-    binary_tree_delete(tree->right); /* Delete right subtree */
+ 
+	binary_tree_delete(tree->left);  /* Delete left subtree */
+	binary_tree_delete(tree->right); /* Delete right subtree */
 
-    free(tree); /* Free current node */
+	free(tree); /* Free current node */
 }
