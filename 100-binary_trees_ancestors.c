@@ -61,3 +61,4 @@ binary_tree_t *binary_trees_ancestor(
     /* Return the common ancestor */
     return ((binary_tree_t *)first);
 }
+
