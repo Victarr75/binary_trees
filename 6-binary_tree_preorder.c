@@ -13,32 +13,21 @@ void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int))
 		return;
 
 	const binary_tree_t *current = tree;
+	const binary_tree_t *stack[100]; /* Assume max height of the tree is 100 */
+	size_t top = 0;
 
-	while (current)
+	while (current || top > 0)
 	{
-		if (current->left == NULL)
+		while (current)
 		{
 			func(current->n);
-			current = current->right;
-		}
-		else
-		{
-			const binary_tree_t *pre = current->left;
 
-			while (pre->right != NULL && pre->right != current)
-				pre = pre->right;
+			if (current->right)
+				stack[top++] = current->right;
 
-			if (pre->right == NULL)
-			{
-				func(current->n);
-				pre->right = current;
-				current = current->left;
-			}
-			else
-			{
-				pre->right = NULL;
-				current = current->right;
-			}
+			current = current->left;
 		}
+
+		current = stack[--top];
 	}
 }
